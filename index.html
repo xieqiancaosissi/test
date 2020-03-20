@@ -9,7 +9,9 @@
     }
   </style>
   <body>
-    <button class="btn" onclick="clickMe()">点击我</button>
+    <button class="btn" onclick="clickMe()">点击我拉起</button>
+    <button class="btn" onclick="openApp()">点击我先拉起再下载</button>
+    <button class="btn" onclick="downlaod()">点击我下载</button>
   </body>
 </html>
 
@@ -17,4 +19,18 @@
    function clickMe() {
       window.location.href = 'pptv://page?userfrom=page_home';
    }
+  function downlaod() {
+      window.location.href = 'http://app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
+  }
+  function openApp() {
+    window.location.href = 'pptv://page?userfrom=page_home';
+    // 打不开app去下载
+    const loadTime = new Date();
+    setTimeout(function(){
+      const outTime = new Date()
+      if(outTime - loadTime > 800){
+        window.location.href = 'http://app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
+      }
+    },1000)
+  }
 </script>
