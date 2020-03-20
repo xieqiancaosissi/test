@@ -26,14 +26,57 @@
       window.location.href = 'http://app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
   }
   function openApp() {
-    window.open(appUrl);
-    // 打不开app去下载
-    const loadTime = new Date();
-    setTimeout(function(){
-      const outTime = new Date()
-      if(outTime - loadTime > 800){
-        window.location.href = 'http://app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
+    function download() {
+      window.location.href = '//app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
+    }
+    const ua = window.navigator.userAgent
+    const appUrl = 'pptv://page?userfrom=page_home';
+    const win = window;
+    if (/(iphone|ipad|ipod|ios)/i.test(ua)) { // ios
+      const chromeV = /Chrome\//.test(ua) && !/Version\/4/.test(ua);
+      if (/Chrome/i.test(ua) && chromeV) {
+        const chromeVer = /Chrome\/(\d{2})/i.exec(ua);
+        if (chromeVer && parseInt(chromeVer[1], 10) < 35) {
+          win.location.href = appUrl;
+        } else {
+          const openTab = win.open(appUrl);
+          setTimeout(() => openTab && openTab.close(), 1000);
+        }
+        download();
+      } else {
+        window.location.href = appUrl;
+        window.setTimeout(() => {
+          if (document.visibilityState !== 'hidden') {
+            download();
+          }
+        }, 1500);
       }
-    },1000)
+    } else {
+      let downloadDelay = 1500;
+      // 三星手机采用win.open方式拉起app
+      if (/samsung/i.test(ua)) {
+        const openTab = win.open(appUrl);
+        setTimeout(() => openTab && openTab.close(), 1500);
+      }
+      // 华为手机采用location方式拉起app
+      if (/(huawei)|(honor)/i.test(ua)) {
+        // 华为手机win.open会有新tab切换动效，导致1500后close操作必须与下面的判断操作更早。
+        // 所以这里后置判断设置为1800
+        downloadDelay = 1800;
+        window.location.href = appUrl;
+      }
+      window.setTimeout(() => {
+        const child = document.querySelector('#openappiframe');
+        document.getElementsByTagName('body')[0].removeChild(child);
+        if (document.visibilityState !== 'hidden') {
+          download();
+        }
+      }, downloadDelay);
+      const f = document.createElement('iframe');
+      f.setAttribute('id', 'openappiframe');
+      f.setAttribute('style', 'display:none');
+      f.setAttribute('src', appUrl);
+      document.getElementsByTagName('body')[0].appendChild(f);
+    }
   }
 </script>
