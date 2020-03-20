@@ -18,6 +18,7 @@
 </html>
 
 <script type="text/javascript">
+   const appUrl = 'pptv://page?userfrom=page_home';
    function clickMe() {
       window.location.href = 'pptv://page?userfrom=page_home';
    }
@@ -25,7 +26,7 @@
       window.location.href = 'http://app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
   }
   function openApp() {
-    window.location.href = 'pptv://page?userfrom=page_home';
+    window.open(appUrl');
     // 打不开app去下载
     const loadTime = new Date();
     setTimeout(function(){
