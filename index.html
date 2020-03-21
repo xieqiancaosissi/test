@@ -46,7 +46,9 @@
     document.getElementsByTagName('body')[0].appendChild(f);
   }
   window.onload = function() {
-   load();
+     setTimeout(() => {
+       openApp();
+     }, 4000)
   }
    function openApp() {
      var before = new Date().getTime();
