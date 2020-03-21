@@ -38,7 +38,10 @@
 //   f.setAttribute('src', appUrl);
 //   document.getElementsByTagName('body')[0].appendChild(f);
   window.onload = function() {
-openApp();
+    setTimeout(() => {
+      openApp();
+    }, 1000);
+
 }
    function openApp() {
      var before = new Date().getTime();
