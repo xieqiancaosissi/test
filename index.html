@@ -23,18 +23,13 @@
     function download() {
       window.location.href = '//app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
     }
-    window.location.href = appUrl;
-    window.setTimeout(() => {
-        const child = document.querySelector('#openappiframe');
-        document.getElementsByTagName('body')[0].removeChild(child);
-        if (document.visibilityState !== 'hidden') {
-          download();
-        }
-      }, 1500);
-      const f = document.createElement('iframe');
-      f.setAttribute('id', 'openappiframe');
-      f.setAttribute('style', 'display:none');
-      f.setAttribute('src', appUrl);
-      document.getElementsByTagName('body')[0].appendChild(f);
+     var before = new Date().getTime();
+      window.location.href = appUrl;
+      setTimeout(function () {
+          var after = new Date().getTime();
+          if ((after - before) < 2050) {
+            download();
+          }
+      }, 2000);
    }
 </script>
