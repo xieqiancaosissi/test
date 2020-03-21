@@ -35,7 +35,7 @@
     window.setTimeout(() => {
       const child = document.querySelector('#openappiframe');
       document.getElementsByTagName('body')[0].removeChild(child);
-      if (document.visibilityState !== 'hidden' && !utils.isPPTVSports()) {
+      if (document.visibilityState !== 'hidden') {
         download();
       }
     }, downloadDelay);
