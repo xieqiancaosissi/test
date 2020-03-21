@@ -37,9 +37,9 @@
 //   f.setAttribute('style', 'display:none');
 //   f.setAttribute('src', appUrl);
 //   document.getElementsByTagName('body')[0].appendChild(f);
-   document.addEventListener('click',() => {
-    openApp();
-  });
+  window.onload = function() {
+openApp();
+}
    function openApp() {
      var before = new Date().getTime();
       window.location.href = appUrl;
