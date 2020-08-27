@@ -18,7 +18,7 @@
 </html>
 
 <script type="text/javascript">
-  alert(window.navigator.userAgent + '.....' + document.cookie);
+  //alert(window.navigator.userAgent + '.....' + document.cookie);
   const appUrl = 'pptv://page?userfrom=page_home';
   function download() {
       window.location.href = '//app.aplus.pptv.com/minisite/pptvaphone/m_app_down/pg_yd1';
@@ -47,7 +47,7 @@
     document.getElementsByTagName('body')[0].appendChild(f);
   }
   window.onload = function() {
-     load();
+     //load();
   }
    function openApp() {
      var before = new Date().getTime();
@@ -59,4 +59,16 @@
           }
       }, 2000);
    }
+    function getLocation(){
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }else{
+          alert("定位失败");
+        }
+    }
+    function showPosition(position){
+      alert(position.coords.latitude);
+      const result = "我当前经度为"+position.coords.latitude+",纬度为"+position.coords.longitude+"的地方哦"
+    }
+    getLocation();
 </script>
